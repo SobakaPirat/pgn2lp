@@ -1,7 +1,22 @@
 from chess.pgn import read_game
 
 # Specify the name of your file here
-pgn_file_path = 'tournament.pgn'
+pgn_file_path = 'tournament2.pgn'
+
+def swap_name_surname(full_name):
+    # Split the string by comma
+    parts = full_name.split(',')
+    
+    # Ensure that the string contains two parts: surname and name
+    if len(parts) != 2:
+        return full_name  # If not, return the original string
+    
+    # Remove extra spaces around the name and surname
+    surname = parts[0].strip()
+    name = parts[1].strip()
+    
+    # Return the string in the format "Name Surname"
+    return f"{name} {surname}"
 
 def parse_pgn_to_wikicode(file_path):
     matches = []
@@ -30,8 +45,8 @@ def parse_pgn_to_wikicode(file_path):
             match_record = f"""|{{{{Match
     |finished=true
     |date={date}
-    |opponent1={{{{1Opponent|{white}|flag=}}}}
-    |opponent2={{{{1Opponent|{black}|flag=}}}}
+    |opponent1={{{{1Opponent|{swap_name_surname(white)}|flag=}}}}
+    |opponent2={{{{1Opponent|{swap_name_surname(black)}|flag=}}}}
     |map1={{{{Map|winner={winner}|white=1|eco={eco}|moves={moves}}}}}
 }}}}"""
             matches.append(match_record)
@@ -40,5 +55,4 @@ def parse_pgn_to_wikicode(file_path):
 # Converting data from PGN
 for match in parse_pgn_to_wikicode(pgn_file_path):
     print(match)
-
 
