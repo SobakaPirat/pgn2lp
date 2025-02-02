@@ -61,7 +61,7 @@ def parse_pgn_to_wikicode(file_path):
     |date={date}
     |opponent1={{{{1Opponent|{swap_name_surname(white)}|flag=}}}}
     |opponent2={{{{1Opponent|{swap_name_surname(black)}|flag=}}}}
-    |map1={{{{Map|winner={winner}|white=1|eco={eco}|moves={moves}}}}}
+    |map1={{{{Map|winner={winner}|white=1|eco={eco}|length={moves}}}}}
 }}}}"""
             matches.append(match_record)
     return matches
